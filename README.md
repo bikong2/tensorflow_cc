@@ -120,3 +120,16 @@ cmake .. && make
 
 If you are still unsure, consult the Dockerfiles for
 [Ubuntu](Dockerfiles/ubuntu) and [Arch Linux](Dockerfiles/archlinux).
+
+
+
+### Q&A
+for static lib, we need add -fPIC in cmake cmd.  
+for nsync.a we need to add -fPIC in file:
+tensorflow_cc/build/tensorflow/tensorflow/contrib/makefile/compile_nsync.sh  
+tensorflow/contrib/makefile/downloads/nsync/platform/posix/make.common  
+tensorflow/contrib/makefile/downloads/nsync/builds/default.linux.c++11/Makefile  
+
+
+
+
