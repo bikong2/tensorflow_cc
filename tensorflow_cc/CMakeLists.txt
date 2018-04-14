@@ -11,7 +11,10 @@ option(TENSORFLOW_SHARED "Build shared library (required for GPU support)." OFF)
 option(TENSORFLOW_STATIC "Build static library." ON)
 
 # -------------
-# CMake Options
+# added by xihuali@tencent.com
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 # -------------
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -19,6 +22,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/lib")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/lib")
 include(CMakePackageConfigHelpers)
 set(CMAKECFG_INSTALL_DIR lib/cmake/TensorflowCC)
+
 
 # --------------------------------------------------------
 # Include External Projects for Shared / Static Tensorflow
@@ -47,7 +51,7 @@ if(TENSORFLOW_SHARED)
   add_library(tensorflow_cc_shared INTERFACE)
   target_compile_options(
     tensorflow_cc_shared INTERFACE
-    "-std=c++11"
+    "-std=c++11 -fPIC"
   )
   add_dependencies(
     tensorflow_cc_shared
@@ -81,7 +85,7 @@ if(TENSORFLOW_STATIC)
   add_library(tensorflow_cc_static INTERFACE)
   target_compile_options(
     tensorflow_cc_static INTERFACE
-    "-std=c++11"
+    "-std=c++11 -fPIC"
   )
   add_dependencies(
     tensorflow_cc_static
